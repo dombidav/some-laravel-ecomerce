@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StaticController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::view('home', 'home')->middleware('auth');
+Route::get('/', [StaticController::class, 'welcome'])->name('welcome');
+Route::get('/home', [StaticController::class, 'home'])->name('home');
 
 Route::group(['middleware' => 'auth'], function ($router){
     Route::resource('category', CategoryController::class)->only(['create', 'edit']);

@@ -16,18 +16,18 @@ class UserController extends Controller
 
     public function index(): ViewFactory|View|Application
     {
-        return view('users.index', User::all());
+        return view('users.index', ['users' => User::all()]);
     }
 
     public function profile(): ViewFactory|View|Application
     {
-        return view('users.show', Auth::user());
+        return view('users.show', ['user' => Auth::user()]);
     }
 
     public function show(User $user): View|ViewFactory|Redirector|RedirectResponse|Application
     {
         if(Auth::user()->id === $user->id || Auth::user()->is_admin){
-            return view('users.show', $user);
+            return view('users.show', ['user' => $user]);
         }
 
         abort(StatusCode::FORBIDDEN, 'You can not view another user\'s profile' );
@@ -38,7 +38,7 @@ class UserController extends Controller
     public function edit(User $user): View|ViewFactory|Redirector|RedirectResponse|Application
     {
         if(Auth::user()->id === $user->id){ //Even admins shouldn't be able to play with profiles
-            return view('users.form', $user);
+            return view('users.form', ['user' => $user]);
         }
 
         abort(StatusCode::FORBIDDEN, 'You can not edit another user\'s profile' );

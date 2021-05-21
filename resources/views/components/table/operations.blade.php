@@ -2,10 +2,8 @@
     @if($view) <a class="btn btn-primary" href="{{ route("$route.show", [$item]) }}">View</a> @endif
     @if($edit) <a class="btn btn-warning" href="{{ route("$route.edit", [$item]) }}">Edit</a> @endif
     @if($delete)
-        <form class="d-inline" action="{{ route("$route.destroy", [$item]) }}" method="post">
-            @csrf
-            @method('delete')
-            <input type="submit" value="Delete" class="btn btn-danger" />
-        </form>
+            <x-button.magic :route='route("$route.destroy", [$item])' method="delete" confirm="Are you sure? This can not be undone!" class="btn btn-danger">
+                Delete
+            </x-button.magic>
     @endif
 </td>

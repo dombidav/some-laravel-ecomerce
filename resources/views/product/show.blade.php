@@ -5,7 +5,8 @@
         <div class="wrapper card">
             <div class="row mx-1 mx-lg-5">
                 <div class="col-12 col-lg-4">
-                    <img src="{{ asset('img/product_img.png') }}" alt="">
+                    <img src="{{ asset($product->image ?? 'img/product_img.png') }}" style="max-width: inherit" alt="">
+{{--                    TODO: Move element style to css--}}
                 </div>
                 <div class="col-12 col-lg-8">
                     <h2 class="m-lg-3">{{ $product->name }}</h2>
@@ -23,6 +24,7 @@
                     <a href="{{ route('order.create', [$product]) }}" class="btn btn-success">Place order</a>
                     @if(Auth::user()->is_admin)
                         <a href="{{ route('product.edit', [$product]) }}" class="btn btn-warning">Edit</a>
+                        <x-button.magic class="btn btn-danger" :route="route('product.destroy', [$product])" method="delete" confirm="Are you sure you wish to delete this item?">Delete</x-button.magic>
                     @endif
                 </div>
             </div>

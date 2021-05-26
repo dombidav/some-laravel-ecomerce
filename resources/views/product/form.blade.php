@@ -12,7 +12,11 @@
                     <h4>Edit Product</h4>
                 </div>
                 <div class="card-body">
-                    <x-form :to="$product ? route('product.update', [$product]) : route('product.store')" :method="$product ? 'put' : 'post'">
+                    <x-form
+                        :to="$product ? route('product.update', [$product]) : route('product.store')"
+                        :method="$product ? 'put' : 'post'"
+                        :allowFile="true"
+                    >
                         <x-form.input name="brand"
                                       class="my-3"
                                       placeholder="Something"
@@ -61,6 +65,11 @@
                                       :value="old('category') ?? $product?->category?->name ?? ''"
                                       :required="true">
                             Category
+                        </x-form.input>
+                        <x-form.input type="file"
+                                      name="image"
+                                      class="my-3 form-file-input"
+                        >
                         </x-form.input>
                         <x-form.submit />
                     </x-form>

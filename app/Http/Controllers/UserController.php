@@ -14,7 +14,7 @@ use Illuminate\Routing\Redirector;
 
 class UserController extends Controller
 {
-
+    
     public function setAdmin(User $user, Request $request){
         if(!Auth::user()->is_admin){
             abort(StatusCode::FORBIDDEN, 'You can not change the authorization of a user');

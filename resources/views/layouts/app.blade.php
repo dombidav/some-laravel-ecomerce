@@ -25,7 +25,6 @@
 
 </head>
 <body>
-{{--  `d-flex flex-column min-vh-100` and `mt-auto` on footer are the evil Bootstrap5 magic to keep the footer down. Do not remove.  --}}
     <div id="app" class="d-flex flex-column min-vh-100">
         @include('components.navbar')
 

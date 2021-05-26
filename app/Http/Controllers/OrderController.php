@@ -10,7 +10,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        return view('order.index', ['order' => Order::all()]);
+        return view('order.index', ['orders' => Order::paginate(30)]);
     }
 
 
@@ -19,35 +19,35 @@ class OrderController extends Controller
         return view('order.form');
     }
 
-   
+
     public function store(Request $request)
     {
-        Order::create($request->validated());
-        return redirect(route('order.index'));
+        $order = Order::create($request->validated());
+        return redirect(route('order.show', [$order]));
     }
 
-    
+
     public function show(Order $order)
     {
         return view('order.show', ['order' => $order]);
     }
 
-   
+
     public function edit(Order $order)
     {
         return view('order.form', ['order' => $order]);
     }
 
-   
+
     public function update(Request $request, Order $order)
     {
         $order->update($request->validated());
         $order->save();
 
-        return redirect(route('order.show', [$order->id]));
+        return redirect(route('order.show', [$order]));
     }
 
-    
+
     public function destroy(Order $order)
     {
         $order->delete();
